@@ -1,34 +1,35 @@
 package com.company;
+public class Main{
+    public static final int ARRAY_SIZE = 100;
 
+    Persona[] persone = new Persona[ARRAY_SIZE];
 
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+    int numPersone;
 
-public class Main extends Application {
+    public Main() {
+        persone[numPersone++] = new Persona("Mario", "Rossi", "1", 1956);
+        persone[numPersone++] = new Studente("Giovanni", "Bianchi", "3", 1995, "UNITN", "TRIENNALE");
+
+    }
 
     public static void main(String[] args) {
-        launch(args);
+        Main palestra = new Main();
+        palestra.printArray(palestra.persone[]);
+
+
+
     }
 
-    @Override
-    public void start(Stage primarystage) throws Exception {
-        Button button = new Button("Say Hello World!");
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                System.out.println("Hello World!");
+    public void printArray(Persona[] persone){
+
+
+        for (int i = 0; i <palestra.numPersone; i++) {
+            if (palestra.persone[i] instanceof Studente){
+
             }
-        });
+        }
 
-        StackPane root = new StackPane(button);
-
-        primarystage.setTitle("Hello World");
-        primarystage.setScene(new Scene(root, 300, 275));
-        primarystage.show();
+        System.out.println(p);
     }
+
 }
