@@ -39,6 +39,6 @@ public class Atleta extends Persona {
         }else{
             r = "nazionale";
         }
-        return super.toString() + " " + disciplina + " " + l;
+        return super.toString() + " " + disciplina + " " + r;
     }
 }

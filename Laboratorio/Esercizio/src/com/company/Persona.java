@@ -10,7 +10,7 @@ public class Persona {
         this.cognome= cognome;
         this.CF = CF;
         this.annoNascita = annoNascita;
-        setNomeCognome(nome, cognome);
+        setCognomeNome(nome, cognome);
     }
 
     public String getNome() {
@@ -45,24 +45,25 @@ public class Persona {
         this.annoNascita = annoNascita;
     }
 
-    public String getNomeCognome() {
+    public String getCognomeNome() {
         return nomeCognome;
     }
 
-    public void setNomeCognome(String nome, String cognome) {
+    public void setCognomeNome(String nome, String cognome) {
         this.nomeCognome = nome + " " + cognome;
     }
 
 
     public double getTariffa(){
         if(annoNascita < 1968){
-            return TARIFFA_BASE * (1-0.4);
+            return TARIFFA_BASE * (1-0.35);
+        }else{
+            return TARIFFA_BASE;
         }
-        return 0.0;
     }
 
     @Override
     public String toString() {
-        return getNomeCognome() + " " + CF + " " + annoNascita;
+        return getCognomeNome() + " " + CF + " " + annoNascita;
     }
 }
