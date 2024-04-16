@@ -1,8 +1,8 @@
 package com.company;
 
-public class Persona {
+public class Persona implements Comparable<Persona>{
     public static final int TARIFFA_BASE = 1000;
-    String nome, cognome, CF , nomeCognome;
+    String nome, cognome, CF , cognomeNome;
     int annoNascita;
 
     public Persona(String nome, String cognome, String CF, int annoNascita){
@@ -46,11 +46,11 @@ public class Persona {
     }
 
     public String getCognomeNome() {
-        return nomeCognome;
+        return cognomeNome;
     }
 
     public void setCognomeNome(String nome, String cognome) {
-        this.nomeCognome = nome + " " + cognome;
+        this.cognomeNome = cognome + " " + nome;
     }
 
 
@@ -65,5 +65,10 @@ public class Persona {
     @Override
     public String toString() {
         return getCognomeNome() + " " + CF + " " + annoNascita;
+    }
+
+    @Override
+    public int compareTo(Persona o) {
+        return cognome.compareTo(o.cognome);
     }
 }

@@ -1,9 +1,8 @@
 package com.company;
 
-public class Atleta extends Persona {
+public class Atleta extends Persona implements IAtleta {
 
     String disciplina;
-    enum Rilevanza{ NAZIONALE, INTERNAZIONALE };
     Rilevanza rilevanza;
 
     public Atleta(String nome, String cognome, String CF, int annoNascita, String disciplina, Rilevanza r) {
@@ -24,9 +23,9 @@ public class Atleta extends Persona {
     public double getTariffa() {
         double tariffa = 0;
         if(rilevanza == Rilevanza.INTERNAZIONALE){
-            tariffa = TARIFFA_BASE * (1-0.5);
+            tariffa = TARIFFA_BASE * (1-SCONTO_INTERNAZIONALE);
         }else {
-            tariffa = TARIFFA_BASE * (1 - 0.3);
+            tariffa = TARIFFA_BASE * (1 - SCONTO_NAZIONALE);
         }
         return Math.min(super.getTariffa(), tariffa);
     }
