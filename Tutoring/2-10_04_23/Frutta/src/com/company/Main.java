@@ -9,7 +9,7 @@ public class Main{
         Cesto<Mela> cestoMela = new Cesto<>(10);
 
         //crea un cesto misto con 3 mele, 2 pere e 1 arancia
-        Cesto<Frutto> cestoMisto = new Cesto<>(10);
+            Cesto cestoMisto = new Cesto<>(10);
         cestoMisto.add(new Mela());
         cestoMisto.add(new Mela());
         cestoMisto.add(new Mela());
