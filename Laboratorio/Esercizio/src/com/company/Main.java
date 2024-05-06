@@ -1,5 +1,8 @@
 package com.company;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
+
 import javax.print.DocFlavor;
 import java.util.*;
 
@@ -10,7 +13,9 @@ public class Main{
 
     int numPersone;
 
+
     public Main() {
+        //launch(args);
         persone.add(new Persona("Mario", "Rossi", "1", 1950));
         //tutto come riga sopra
         persone.add(new Persona( "Carla", "Rossi", "2", 1990));

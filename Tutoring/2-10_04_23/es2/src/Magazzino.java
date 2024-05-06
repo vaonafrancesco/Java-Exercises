@@ -14,7 +14,6 @@ public class Magazzino {
         if(scarpe.containsKey(scarpa)){
             scarpe.put(scarpa, scarpe.get(scarpa)+1);
         }else{
-            System.out.println("entrato nel else");
             scarpe.put(scarpa, 1);
         }
         dim++;
@@ -52,9 +51,27 @@ public class Magazzino {
             return true;
             //scarpe.put(scarpa, scarpe.get(scarpa)+1);
         }else{
+            System.out.println("FALSE BRO");
             return false;
         }
 
         //scarpe.remove(scarpa.getModello(), scarpa.getTaglia());
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        //stamoa tutto il Map
+        return scarpe.toString();
+
     }
 }
