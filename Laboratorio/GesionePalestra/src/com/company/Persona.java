@@ -69,6 +69,6 @@ public class Persona implements Comparable<Persona>{
 
     @Override
     public int compareTo(Persona o) {
-        return cognome.compareTo(o.cognome);
+        return cognomeNome.compareTo(o.cognomeNome);
     }
 }

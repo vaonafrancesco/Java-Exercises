@@ -31,7 +31,7 @@ public class Main extends Application{
     Button perNome = new Button("Per nome");
     Button perEta = new Button("Per eta");
     Button exit = new Button("Exit");
-    final int SPACING = 10;
+    static final double SPACING = 10.0;
     //endregion
 
     List<Persona> persone = new LinkedList<Persona>();
@@ -72,11 +72,11 @@ public class Main extends Application{
         topRightHB.setSpacing(SPACING);
         //endregion
 
-        AnchorPane.setLeftAnchor(topLeftHB, 10.0);
-        AnchorPane.setTopAnchor(topLeftHB, 7.0);
-        AnchorPane.setBottomAnchor(topLeftHB, 7.0);
-        AnchorPane.setRightAnchor(topRightHB, 10.0);
-        AnchorPane.setBottomAnchor(topRightHB, 7.0);
+        AnchorPane.setLeftAnchor(topLeftHB, SPACING);
+        AnchorPane.setTopAnchor(topLeftHB, SPACING);
+        AnchorPane.setBottomAnchor(topLeftHB, SPACING);
+        AnchorPane.setRightAnchor(topRightHB, SPACING);
+        AnchorPane.setBottomAnchor(topRightHB, SPACING);
 
         topAP.getChildren().add(topLeftHB);
         topAP.getChildren().add(topRightHB);
@@ -100,8 +100,8 @@ public class Main extends Application{
         //endregion
 
         bottomAP.getChildren().add(bottomRightHB);
-        AnchorPane.setRightAnchor(bottomRightHB, 10.0);
-        AnchorPane.setBottomAnchor(bottomRightHB, 5.0);
+        AnchorPane.setRightAnchor(bottomRightHB, SPACING);
+        AnchorPane.setBottomAnchor(bottomRightHB, SPACING);
 
         //endregion
 
@@ -201,16 +201,16 @@ public class Main extends Application{
         switch (filter){
             case TUTTI :
                 if (order == Order.PER_ETA){
-                    Collections.sort(persone, new ComparatorByYear());
+                    persone.sort(new ComparatorByYear());
                     for(Persona p : persone){
-                        testo += p.toString() + "\n";
+                        testo += p.toString() + " | " + p.getTariffa() + "\n";
                     };
 
                 } else if (order == Order.PER_NOME) {
 
                     Collections.sort(persone);
                     for(Persona p : persone){
-                        testo += p.toString() + "\n";
+                        testo += p.toString() + " | " + p.getTariffa() + "\n";
                     };
                 }
                 break;
@@ -219,7 +219,7 @@ public class Main extends Application{
                     Collections.sort(persone, new ComparatorByYear());
                     for(Persona p : persone){
                         if (p instanceof IAtleta){
-                            testo += p.toString() + "\n";
+                            testo += p.toString() + " | " + p.getTariffa() + "\n";
                         }
                     };
 
@@ -228,7 +228,7 @@ public class Main extends Application{
                     Collections.sort(persone);
                     for(Persona p : persone){
                         if (p instanceof IAtleta){
-                            testo += p.toString() + "\n";
+                            testo += p.toString() + " | " + p.getTariffa() + "\n";
                         }
                     };
                 }
@@ -239,7 +239,7 @@ public class Main extends Application{
                     Collections.sort(persone, new ComparatorByYear());
                     for(Persona p : persone){
                         if (p instanceof Studente){
-                            testo += p.toString() + "\n";
+                            testo += p.toString() + " | " + p.getTariffa() + "\n";
                         }
                     };
 
@@ -248,7 +248,7 @@ public class Main extends Application{
                     Collections.sort(persone);
                     for(Persona p : persone){
                         if (p instanceof Studente){
-                            testo += p.toString() + "\n";
+                            testo += p.toString() + " | " + p.getTariffa() + "\n";
                         }
                     };
                 }
