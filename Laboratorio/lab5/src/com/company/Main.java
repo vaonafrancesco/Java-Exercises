@@ -18,12 +18,14 @@ public class Main extends Application {
     private static final double PRIMARYSTAGEWIDTH = 500;
     private static final double MOVEMENT = 10;
     private static final double RADIUS = 20;
-    Random random = new Random();
 
     static SecondStage secondWindow = new SecondStage();
     Stage secondStage = new Stage();
     //Circle user = new Circle();
-    Pallina user = new Pallina(RADIUS, Color.ORANGE);
+    Ball user = new User();
+    Ball bubbler = new Bubbler();
+    Ball striker = new Striker();
+    Ball wanderer = new Wanderer();
 
     public static void main(String[] args) {
         launch(args);
@@ -33,14 +35,15 @@ public class Main extends Application {
     public void start(Stage primarystage) throws Exception {
 
 
+
         secondWindow.start(secondStage);
-        Group root = new Group(user);
+        Group root = new Group();
         Scene scene = new Scene(root, PRIMARYSTAGEWIDTH, PRIMARYSTAGEHEIGHT);
         primarystage.setTitle("Escape!");
         primarystage.setScene(scene);
         primarystage.show();
-        user.setCenterX(getRandomX(primarystage.getWidth()));
-        user.setCenterY(getRandomY(primarystage.getHeight()));
+
+        root.getChildren().addAll(user, bubbler, striker, wanderer);
 
 
         //region movements
@@ -92,11 +95,6 @@ public class Main extends Application {
 
     }
 
-    private double getRandomX(double height) {
-        return random.nextInt((int)height);
-    }
-    private double getRandomY(double width) {
-        return random.nextInt((int)width);
-    }
+
 
 }
