@@ -27,24 +27,15 @@ public class Wanderer extends Enemy{
     }
 
     public void setDirection(int num) {
-        switch (num){
-            case 0: direction = Direction.BOTTOM;
-                break;
-            case 1: direction = Direction.BOTTOMLEFT;
-                break;
-            case 2: direction = Direction.BOTTOMRIGHT;
-                break;
-            case 3: direction = Direction.LEFT;
-                break;
-            case 4: direction = Direction.RIGHT;
-                break;
-            case 5: direction = Direction.TOP;
-                break;
-            case 6: direction = Direction.TOPLEFT;
-                break;
-            case 7: direction = Direction.TOPRIGHT;
-                break;
-
+        switch (num) {
+            case 0 -> direction = Direction.BOTTOM;
+            case 1 -> direction = Direction.BOTTOMLEFT;
+            case 2 -> direction = Direction.BOTTOMRIGHT;
+            case 3 -> direction = Direction.LEFT;
+            case 4 -> direction = Direction.RIGHT;
+            case 5 -> direction = Direction.TOP;
+            case 6 -> direction = Direction.TOPLEFT;
+            case 7 -> direction = Direction.TOPRIGHT;
         }
     }
 

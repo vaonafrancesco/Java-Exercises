@@ -7,7 +7,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -20,13 +19,13 @@ public class Main extends Application {
     private static final double MOVEMENT = 10;
     private static final double RADIUS = 20;
     private static final int NEWBALL = 10;
+    private static boolean GAMEOVER = false;
     Random random = new Random();
     int counter = NEWBALL;
     ArrayList<Ball> balls = new ArrayList<>();
 
     static SecondStage secondWindow = new SecondStage();
     Stage secondStage = new Stage();
-    //Circle user = new Circle();
     Ball user = new User();
     Ball bubbler = new Bubbler();
     Ball striker = new Striker();
@@ -61,28 +60,25 @@ public class Main extends Application {
         scene.setOnKeyPressed(new EventHandler<>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                checkNewBall();
-
-                switch (keyEvent.getCode()) {
-                    case UP -> {
-                        user.setCenterY(user.getCenterY() - MOVEMENT);
-                        checkPosition(user);
-                        movement();
-                    }
-                    case DOWN -> {
-                        user.setCenterY(user.getCenterY() + MOVEMENT);
-                        checkPosition(user);
-                        movement();
-                    }
-                    case RIGHT -> {
-                        user.setCenterX(user.getCenterX() + MOVEMENT);
-                        checkPosition(user);
-                        movement();
-                    }
-                    case LEFT -> {
-                        user.setCenterX(user.getCenterX() - MOVEMENT);
-                        checkPosition(user);
-                        movement();
+                if (!GAMEOVER) {
+                    checkNewBall();
+                    switch (keyEvent.getCode()) {
+                        case UP -> {
+                            user.setCenterY(user.getCenterY() - MOVEMENT);
+                            iteration();
+                        }
+                        case DOWN -> {
+                            user.setCenterY(user.getCenterY() + MOVEMENT);
+                            iteration();
+                        }
+                        case RIGHT -> {
+                            user.setCenterX(user.getCenterX() + MOVEMENT);
+                            iteration();
+                        }
+                        case LEFT -> {
+                            user.setCenterX(user.getCenterX() - MOVEMENT);
+                            iteration();
+                        }
                     }
                 }
             }
@@ -90,6 +86,29 @@ public class Main extends Application {
 
 
         //endregion
+    }
+
+    private void checkCollision() {
+        for(Ball b : balls){
+            if (checkDistance(b, user)) {
+                GAMEOVER = true;
+                secondWindow.setGameOver();
+            }
+        }
+    }
+
+    private boolean checkDistance(Ball b, Ball user) {
+        double ballX, ballY, userX, userY;
+        ballX = b.getCenterX();
+        ballY = b.getCenterY();
+        userX = user.getCenterX();
+        userY = user.getCenterY();
+        if(Math.sqrt((Math.pow(ballX-userX, 2)+ Math.pow(ballY-userY, 2)))<=b.getRadius()+RADIUS){
+            b.setFill(Color.RED);
+            user.setFill(Color.RED);
+            return true;
+        };
+        return false;
     }
 
     private void checkNewBall() {
@@ -112,34 +131,14 @@ public class Main extends Application {
         }
     }
 
-    private void movement() {
+    private void iteration() {
         for (Ball b : balls){
             b.movement();
-            checkPosition(b);
+            user.checkPosition();
+            b.checkPosition();
+            checkCollision();
         }
+        secondWindow.setScore();
     }
-
-    private void checkPosition(Circle element) {
-        double centerX = element.getCenterX();
-        double centerY = element.getCenterY();
-
-        if (centerX < 0) {
-            element.setCenterX(centerX + PRIMARYSTAGEWIDTH);
-
-        }else if(centerX > PRIMARYSTAGEWIDTH){
-            element.setCenterX(centerX - PRIMARYSTAGEWIDTH);
-
-        }else if (centerY < 0) {
-            element.setCenterY(centerY + PRIMARYSTAGEHEIGHT);
-
-        }else if(centerY > PRIMARYSTAGEHEIGHT){
-            element.setCenterY(centerY - PRIMARYSTAGEHEIGHT);
-        }
-
-    }
-
-
-
-
 
 }

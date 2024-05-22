@@ -62,6 +62,7 @@ public class Striker extends Enemy{
                 super.setCenterY(super.getCenterY() - MOVEMENT);
                 super.setCenterX(super.getCenterX() + MOVEMENT);
             }
+            default -> throw new IllegalStateException("Unexpected value: " + direction);
         }
     }
 }

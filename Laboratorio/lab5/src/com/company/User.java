@@ -10,7 +10,6 @@ public class User extends Ball{
     public User() {
         super();
         super.setFill(color);
-        //user.setColor
     }
     public void movement(){};
 }

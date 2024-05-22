@@ -26,4 +26,23 @@ public abstract class Ball extends Circle {
 
     abstract void movement();
 
+    public void checkPosition() {
+        double centerX = this.getCenterX();
+        double centerY = this.getCenterY();
+
+        if (centerX < 0) {
+            this.setCenterX(centerX + PRIMARYSTAGEWIDTH);
+
+        }else if(centerX > PRIMARYSTAGEWIDTH){
+            this.setCenterX(centerX - PRIMARYSTAGEWIDTH);
+
+        }else if (centerY < 0) {
+            this.setCenterY(centerY + PRIMARYSTAGEHEIGHT);
+
+        }else if(centerY > PRIMARYSTAGEHEIGHT){
+            this.setCenterY(centerY - PRIMARYSTAGEHEIGHT);
+        }
+
+    }
+
 }
