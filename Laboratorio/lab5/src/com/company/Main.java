@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Main extends Application {
@@ -18,6 +19,10 @@ public class Main extends Application {
     private static final double PRIMARYSTAGEWIDTH = 500;
     private static final double MOVEMENT = 10;
     private static final double RADIUS = 20;
+    private static final int NEWBALL = 10;
+    Random random = new Random();
+    int counter = NEWBALL;
+    ArrayList<Ball> balls = new ArrayList<>();
 
     static SecondStage secondWindow = new SecondStage();
     Stage secondStage = new Stage();
@@ -26,6 +31,9 @@ public class Main extends Application {
     Ball bubbler = new Bubbler();
     Ball striker = new Striker();
     Ball wanderer = new Wanderer();
+    Group root = new Group();
+    Ball newBall;
+    Scene scene = new Scene(root, PRIMARYSTAGEWIDTH, PRIMARYSTAGEHEIGHT);
 
     public static void main(String[] args) {
         launch(args);
@@ -34,11 +42,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primarystage) throws Exception {
 
-
+        //balls.add(user);
+        balls.add(bubbler);
+        balls.add(striker);
+        balls.add(wanderer);
 
         secondWindow.start(secondStage);
-        Group root = new Group();
-        Scene scene = new Scene(root, PRIMARYSTAGEWIDTH, PRIMARYSTAGEHEIGHT);
+
         primarystage.setTitle("Escape!");
         primarystage.setScene(scene);
         primarystage.show();
@@ -51,22 +61,28 @@ public class Main extends Application {
         scene.setOnKeyPressed(new EventHandler<>() {
             @Override
             public void handle(KeyEvent keyEvent) {
+                checkNewBall();
+
                 switch (keyEvent.getCode()) {
                     case UP -> {
                         user.setCenterY(user.getCenterY() - MOVEMENT);
-                        checkPosition(user, scene);
+                        checkPosition(user);
+                        movement();
                     }
                     case DOWN -> {
                         user.setCenterY(user.getCenterY() + MOVEMENT);
-                        checkPosition(user, scene);
+                        checkPosition(user);
+                        movement();
                     }
                     case RIGHT -> {
                         user.setCenterX(user.getCenterX() + MOVEMENT);
-                        checkPosition(user, scene);
+                        checkPosition(user);
+                        movement();
                     }
                     case LEFT -> {
                         user.setCenterX(user.getCenterX() - MOVEMENT);
-                        checkPosition(user, scene);
+                        checkPosition(user);
+                        movement();
                     }
                 }
             }
@@ -76,24 +92,53 @@ public class Main extends Application {
         //endregion
     }
 
-    private void checkPosition(Circle element, Scene scene) {
+    private void checkNewBall() {
+        if (counter == 1) {
+            counter = NEWBALL;
+            switch (random.nextInt(3)) {
+                case 0:
+                    balls.add(new Striker());
+                    break;
+                case 1:
+                    balls.add(new Wanderer());
+                    break;
+                case 2:
+                    balls.add(new Bubbler());
+                    break;
+            }
+            root.getChildren().add(balls.getLast());
+        }else{
+            counter--;
+        }
+    }
+
+    private void movement() {
+        for (Ball b : balls){
+            b.movement();
+            checkPosition(b);
+        }
+    }
+
+    private void checkPosition(Circle element) {
         double centerX = element.getCenterX();
         double centerY = element.getCenterY();
 
         if (centerX < 0) {
-            element.setCenterX(centerX + scene.getWidth());
+            element.setCenterX(centerX + PRIMARYSTAGEWIDTH);
 
-        }else if(centerX > scene.getWidth()){
-            element.setCenterX(scene.getX());
+        }else if(centerX > PRIMARYSTAGEWIDTH){
+            element.setCenterX(centerX - PRIMARYSTAGEWIDTH);
 
         }else if (centerY < 0) {
-            element.setCenterY(centerY + scene.getHeight());
+            element.setCenterY(centerY + PRIMARYSTAGEHEIGHT);
 
-        }else if(centerY > scene.getHeight()){
-            element.setCenterY(centerY - scene.getHeight());
+        }else if(centerY > PRIMARYSTAGEHEIGHT){
+            element.setCenterY(centerY - PRIMARYSTAGEHEIGHT);
         }
 
     }
+
+
 
 
 

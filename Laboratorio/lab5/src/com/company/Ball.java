@@ -24,4 +24,6 @@ public abstract class Ball extends Circle {
         return random.nextInt((int)width);
     }
 
+    abstract void movement();
+
 }

@@ -12,4 +12,5 @@ public class User extends Ball{
         super.setFill(color);
         //user.setColor
     }
+    public void movement(){};
 }
